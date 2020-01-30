@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <StartupObject>Mancala.App</StartupObject>
+    <ApplicationIcon>Green Stone.ico</ApplicationIcon>
+    <Version>4.1.0</Version>
+    <Authors>Daniel Spencer</Authors>
+    <Product>Mancala WPF</Product>
+    <Copyright></Copyright>
+    <AssemblyVersion>4.1.0.3</AssemblyVersion>
+    <FileVersion>4.1.0.3</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Licenses.txt" />
+    <None Remove="Menu\Board Only (No Highlighting).png" />
+    <None Remove="Release History.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Licenses.txt" />
+    <Resource Include="Menu\Board Only (No Highlighting).png" />
+    <Resource Include="Release History.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Game\PageCentre.xaml.cs">
+      <DependentUpon>PageCentre.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Game\PageGameBoard.xaml.cs">
+      <DependentUpon>PageGameBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Menu\PageMenuBoard.xaml.cs">
+      <DependentUpon>PageMenuBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Menu\PageNewGameSettings.xaml.cs">
+      <DependentUpon>PageNewGameSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Menu\PagePlayerSettings.xaml.cs">
+      <DependentUpon>PagePlayerSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Menu\PageRules.xaml.cs">
+      <DependentUpon>PageRules.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Menu\PageSizes.xaml.cs">
+      <DependentUpon>PageSizes.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="WindowMain.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="UserSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Game\PageCentre.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Game\PageGameBoard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Menu\PageMenuBoard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Menu\PageNewGameSettings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Menu\PagePlayerSettings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Menu\PageRules.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Menu\PageSizes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowMain.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

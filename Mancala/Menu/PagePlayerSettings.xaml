@@ -1,0 +1,48 @@
+﻿<Page x:Class="Mancala.Menu.PagePlayerSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mancala"
+      mc:Ignorable="d" 
+      Background="White"
+      Title="PagePlayerSettings">
+
+    <StackPanel MinWidth="390" MinHeight="200">
+        <StackPanel.Resources>
+            <Style x:Key="LabelFont" TargetType="Label">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <Style x:Key="TextboxFont" TargetType="TextBox">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+        </StackPanel.Resources>
+
+        <Label FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Content="Player Settings" Margin="0,0,0,20"/>
+        <StackPanel Width="450">
+            <DockPanel LastChildFill="True" Margin="0,0,0,10">
+                <Label x:Name="lblPlayer1NameLabel" DockPanel.Dock="Left" Content="Player 1 name: " Margin="0,0,5,0" Style="{StaticResource LabelFont}"/>
+                <TextBox x:Name="txtPlayer1Name" MaxLength="25" MaxLines="1" LostFocus="txtPlayer1Name_OnLostFocus" Style="{StaticResource TextboxFont}"/>
+            </DockPanel>
+            <DockPanel LastChildFill="True" Margin="0,0,0,15">
+                <Label DockPanel.Dock="Left" Content="Player 2 name: " Margin="0,0,5,0" Style="{StaticResource LabelFont}"/>
+                <TextBox x:Name="txtPlayer2Name" MaxLength="25" MaxLines="1" LostFocus="txtPlayer2Name_OnLostFocus" Style="{StaticResource TextboxFont}"/>
+            </DockPanel>
+            <DockPanel LastChildFill="True" Margin="0,0,0,15">
+                <Label x:Name="lblPlayer2IsLabel" DockPanel.Dock="Left" Content="Player 2 is: " Margin="0,0,5,0" Style="{StaticResource LabelFont}"/>
+                <StackPanel>
+                    <Slider x:Name="sliderPlayer2Is" Minimum="0" Maximum="4" SmallChange="1" LargeChange="1" 
+                            TickPlacement="BottomRight" Width="330"/>
+                    <UniformGrid Rows="1">
+                        <Label Content="Human" Style="{StaticResource LabelFont}"/>
+                        <Label Content="Easy" HorizontalAlignment="Center" Style="{StaticResource LabelFont}"/>
+                        <Label Content="Normal" HorizontalAlignment="Center" Style="{StaticResource LabelFont}"/>
+                        <Label Content="Hard" HorizontalAlignment="Center" Style="{StaticResource LabelFont}"/>
+                        <Label Content="Very Hard" HorizontalAlignment="Right" Style="{StaticResource LabelFont}"/>
+                    </UniformGrid>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+    </StackPanel>
+
+</Page>

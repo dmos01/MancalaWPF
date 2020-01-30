@@ -1,0 +1,56 @@
+﻿<Page x:Class="Mancala.Menu.PageNewGameSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mancala"
+      mc:Ignorable="d" 
+      Background="White"
+      Title="PageNewGameSettings">
+
+    <StackPanel MinWidth="390" MinHeight="200">
+        <StackPanel.Resources>
+            <Style x:Key="LabelFont" TargetType="Label">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <Style x:Key="ComboFont" TargetType="ComboBox">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <Style x:Key="CheckboxFont" TargetType="CheckBox">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+
+        </StackPanel.Resources>
+
+        <Label FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Content="New Game Settings" Margin="0,0,0,20"/>
+        <StackPanel Width="450">
+            <DockPanel LastChildFill="True" Margin="0,0,0,15">
+                <Label DockPanel.Dock="Left" Content="Who starts: " Margin="0,0,5,0" Style="{StaticResource LabelFont}" />
+                <ComboBox x:Name="cboWhoStarts" Style="{StaticResource ComboFont}">
+                    <ComboBoxItem Content="Player 1"/>
+                    <ComboBoxItem Content="Computer"/>
+                    <ComboBoxItem Content="Alternating (Player 1 next)"/>
+                    <ComboBoxItem Content="Random"/>
+
+                </ComboBox>
+            </DockPanel>
+            <DockPanel LastChildFill="False" Margin="0,0,0,15">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <CheckBox x:Name="chkCapturing" Content="Capturing" VerticalContentAlignment="Center" Margin="0,0,10,0"  Style="{StaticResource CheckboxFont}"/>
+                    <CheckBox x:Name="chkMultipleLaps" Content="Multiple laps" VerticalContentAlignment="Center" Style="{StaticResource CheckboxFont}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Label Content="Starting stones per cup (1-20): " Margin="0,0,5,0" Style="{StaticResource LabelFont}"/>
+                        <TextBox x:Name="txtStartingStones" Width="30" MaxLength="2" MaxLines="1" Text="20" FontSize="13" />
+                    </StackPanel>
+            </DockPanel>
+            <DockPanel LastChildFill="True">
+                <Label Content="When one player's side is empty: " Margin="0,0,5,0" Style="{StaticResource LabelFont}"/>
+                <ComboBox x:Name="cboWhenSideEmpty" Style="{StaticResource ComboFont}">
+                    <ComboBoxItem Content="They get the remaining stones."/>
+                    <ComboBoxItem Content="The other gets the remaining stones."/>
+                </ComboBox>
+            </DockPanel>
+        </StackPanel>
+    </StackPanel>
+</Page>

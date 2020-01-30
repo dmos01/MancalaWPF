@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Mancala" GeneratedClassName="UserSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Player1Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Player 1</Value>
+    </Setting>
+    <Setting Name="Player2Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Computer</Value>
+    </Setting>
+    <Setting Name="NumStartingStones" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="PlayerWithEmptySideGetsRemainingStones" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="WhoStarts" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Player</Value>
+    </Setting>
+    <Setting Name="Player2Type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="HumanAnimationSpeed" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00.2500000</Value>
+    </Setting>
+    <Setting Name="ComputerAnimationSpeed" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00.2500000</Value>
+    </Setting>
+    <Setting Name="Capturing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MultipleLaps" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StoneSize" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

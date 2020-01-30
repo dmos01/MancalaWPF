@@ -1,0 +1,24 @@
+﻿<Page x:Class="Mancala.Menu.PageSizes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mancala.Menu"
+      mc:Ignorable="d" 
+      Background="White"
+      Title="PageSizes">
+    <StackPanel MinWidth="390" MinHeight="200">
+        <Label FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Content="Size Settings" Margin="0,0,0,20"/>
+        <StackPanel Orientation="Horizontal">
+            <Grid Height="130" Margin="0,0,10,0">
+                <Border BorderBrush="#FF9F9F9F" BorderThickness="0.5" />
+                <Image Source="Board Only (No Highlighting).png" Margin="1,1,1,1" />
+            </Grid>
+
+            <Grid Height="90">
+                <Button x:Name="btnIncreaseSize" FontSize="15" FontWeight="Bold" MinHeight="30" MinWidth="30" Content="+" VerticalAlignment="Top" Click="BtnIncreaseSize_OnClick"/>
+                <Button x:Name="btnDecreaseSize" FontSize="13" FontWeight="Bold" MinHeight="30" MinWidth="30" Content="-" VerticalAlignment="Bottom" Click="BtnDecreaseSize_OnClick"/>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</Page>

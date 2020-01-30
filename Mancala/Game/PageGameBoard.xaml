@@ -1,0 +1,361 @@
+﻿<Page x:Class="Mancala.Game.PageGameBoard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mancala.Game"
+      mc:Ignorable="d" 
+      Title="PageGameBoard"
+      Background="White"
+      Loaded="PageBoard_OnLoaded">
+
+    <StackPanel Orientation="Horizontal">
+        <StackPanel.Resources>
+            <Style x:Key="StoneStyle" TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Background" Value="Lime" />
+                <Setter Property="Width" Value="15" />
+                <Setter Property="Height" Value="15" />
+            </Style>
+            <Style x:Key="StoneTextStyle" TargetType="Label">
+                <Setter Property="Content" Value="240" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Foreground" Value="Lime" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="CupMancalaStyleBase" TargetType="Label">
+                <Setter Property="Width" Value="80" />
+                <Setter Property="Background" Value="SaddleBrown" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+            <Style x:Key="UniformGridStyle" TargetType="UniformGrid">
+                <Setter Property="Columns" Value="3" />
+            </Style>
+            <Style x:Key="CupStyle" TargetType="Label" BasedOn="{StaticResource CupMancalaStyleBase}">
+                <Setter Property="Height" Value="80" />
+                <EventSetter Event="MouseDown" Handler="CupClick" />
+            </Style>
+            <Style x:Key="MancalaStyle" TargetType="Label"  BasedOn="{StaticResource CupMancalaStyleBase}">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+        </StackPanel.Resources>
+
+        <Label x:Name="btnPlayer1Mancala" Margin="0,0,8,0" Style="{StaticResource MancalaStyle}">
+            <Grid>
+                <UniformGrid Style="{StaticResource UniformGridStyle}">
+                    <Label x:Name="lblPlayer1MancalaStone0" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone1" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone2" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone3" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone4" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone5" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone6" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone7" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone8" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone9" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone10" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone11" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone12" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone13" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone14" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone15" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone16" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone17" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone18" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone19" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone20" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone21" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone22" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone23" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone24" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone25" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone26" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone27" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone28" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone29" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone30" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone31" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone32" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone33" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone34" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone35" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone36" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone37" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone38" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone39" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone40" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone41" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone42" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone43" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer1MancalaStone44" Style="{StaticResource StoneStyle}" />
+                </UniformGrid>
+                <Label x:Name="lblPlayer1MancalaStoneText" Content="240"
+                       FontSize="30" FontWeight="Bold" Foreground="Lime"
+                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            </Grid>
+        </Label>
+
+        <DockPanel x:Name="dockPanelExclMancalas" Width="560" Margin="0,0,8,0">
+            <UniformGrid DockPanel.Dock="Top" Name="uniformGridPlayer2Cups" Columns="6">
+                <Label x:Name="btnPlayer2Cup5" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer2Cup5Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup5Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer2Cup5StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer2Cup4" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer2Cup4Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup4Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer2Cup4StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer2Cup3" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer2Cup3Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup3Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer2Cup3StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer2Cup2" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer2Cup2Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup2Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer2Cup2StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer2Cup1" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer2Cup1Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup1Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer2Cup1StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer2Cup0" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer2Cup0Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer2Cup0Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer2Cup0StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+
+            </UniformGrid>
+
+            <UniformGrid DockPanel.Dock="Bottom" Name="uniformGridPlayer1Cups" Columns="6">
+                <Label x:Name="btnPlayer1Cup0" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer1Cup0Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup0Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer1Cup0StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer1Cup1" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer1Cup1Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup1Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer1Cup1StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer1Cup2" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer1Cup2Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup2Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer1Cup2StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer1Cup3" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer1Cup3Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup3Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer1Cup3StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer1Cup4" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer1Cup4Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup4Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer1Cup4StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+                <Label x:Name="btnPlayer1Cup5" Style="{StaticResource CupStyle}">
+                    <Grid>
+                        <UniformGrid Style="{StaticResource UniformGridStyle}">
+                            <Label x:Name="lblPlayer1Cup5Stone0" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone1" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone2" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone3" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone4" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone5" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone6" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone7" Style="{StaticResource StoneStyle}" />
+                            <Label x:Name="lblPlayer1Cup5Stone8" Style="{StaticResource StoneStyle}" />
+                        </UniformGrid>
+                        <Label x:Name="lblPlayer1Cup5StoneText" Style="{StaticResource StoneTextStyle}" />
+                    </Grid>
+                </Label>
+            </UniformGrid>
+
+            <Frame x:Name="frameCentre" BorderBrush="Black" BorderThickness="0.5" Margin="6,10,6,10" MinHeight="200" NavigationUIVisibility="Hidden" />
+        </DockPanel>
+
+        <Label x:Name="btnPlayer2Mancala" Style="{StaticResource MancalaStyle}">
+            <Grid>
+                <UniformGrid Style="{StaticResource UniformGridStyle}">
+                    <Label x:Name="lblPlayer2MancalaStone0" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone1" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone2" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone3" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone4" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone5" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone6" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone7" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone8" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone9" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone10" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone11" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone12" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone13" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone14" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone15" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone16" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone17" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone18" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone19" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone20" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone21" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone22" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone23" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone24" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone25" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone26" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone27" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone28" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone29" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone30" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone31" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone32" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone33" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone34" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone35" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone36" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone37" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone38" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone39" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone40" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone41" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone42" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone43" Style="{StaticResource StoneStyle}" />
+                    <Label x:Name="lblPlayer2MancalaStone44" Style="{StaticResource StoneStyle}" />
+                </UniformGrid>
+                <Label x:Name="lblPlayer2MancalaStoneText" Content="240"
+                       FontSize="30" FontWeight="Bold" Foreground="Lime"
+                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            </Grid>
+        </Label>
+    </StackPanel>
+</Page>
