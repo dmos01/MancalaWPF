@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Mancala"
         mc:Ignorable="d"
         Title="Mancala" Height="450" Width="770"
         ResizeMode="CanMinimize"
@@ -12,5 +11,5 @@
         MaxWidth="965" MaxHeight="482"
         Loaded="WindowMain_OnLoaded" Closing="WindowMain_OnClosing">
 
-    <Frame x:Name="frameMain" Margin="10,10,10,10" NavigationUIVisibility="Hidden"></Frame>
+    <Frame x:Name="frameMain" Margin="10,10,10,10" NavigationUIVisibility="Hidden" />
 </Window>

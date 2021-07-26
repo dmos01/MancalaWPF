@@ -1,12 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Mancala.Menu
 {
     /// <summary>
-    /// Interaction logic for PageNewGameSettings.xaml
+    ///     Interaction logic for PageNewGameSettings.xaml
     /// </summary>
-    public partial class PageNewGameSettings : Page
+    public partial class PageNewGameSettings
     {
         private PageNewGameSettings() => InitializeComponent();
 
@@ -32,38 +33,40 @@ namespace Mancala.Menu
             cboWhoStarts.Items[0] = UserSettings.Default.Player1Name;
             cboWhoStarts.Items[1] = UserSettings.Default.Player2Name;
 
-            cboWhoStarts.Items[2] = whoStartsNextAlternating == Enums.Player.Player1
-                ? "Alternating (" + UserSettings.Default.Player1Name + " next)"
-                : "Alternating (" + UserSettings.Default.Player2Name + " next)";
+            cboWhoStarts.Items[2] = MancalaResources.WhoStartsComboboxAlternatingPrefix +
+                                    (whoStartsNextAlternating == Enums.Player.Player1
+                                        ? UserSettings.Default.Player1Name
+                                        : UserSettings.Default.Player2Name) +
+                                    MancalaResources.WhoStartsComboboxAlternatingSuffix;
 
-            cboWhoStarts.Items[3] = "Random";
+            cboWhoStarts.Items[3] = MancalaResources.Random;
 
             if (UserSettings.Default.WhoStarts == UserSettings.Default.Player1Name)
                 cboWhoStarts.SelectedIndex = 0;
             else if (UserSettings.Default.WhoStarts == UserSettings.Default.Player2Name)
                 cboWhoStarts.SelectedIndex = 1;
+
+
+            else if (UserSettings.Default.WhoStarts == MancalaResources.Player2HumanDefaultName ||
+                     UserSettings.Default.WhoStarts == MancalaResources.Player2ComputerDefaultName)
+            {
+                cboWhoStarts.SelectedIndex = 1;
+            }
+            else if (UserSettings.Default.WhoStarts.Equals(MancalaResources.Alternating,
+                StringComparison.OrdinalIgnoreCase))
+            {
+                cboWhoStarts.SelectedIndex = 2;
+            }
+            else if (UserSettings.Default.WhoStarts.Equals(MancalaResources.Random,
+                StringComparison.OrdinalIgnoreCase))
+            {
+                cboWhoStarts.SelectedIndex = 3;
+            }
             else
             {
-                switch (UserSettings.Default.WhoStarts)
-                {
-                    case "Player 1":
-                        cboWhoStarts.SelectedIndex = 0;
-                        break;
-                    case "Computer":
-                        cboWhoStarts.SelectedIndex = 1;
-                        break;
-                    case "Alternating":
-                        cboWhoStarts.SelectedIndex = 2;
-                        break;
-                    case "Random":
-                        cboWhoStarts.SelectedIndex = 3;
-                        break;
-                    default:
-                        UserSettings.Default.WhoStarts = UserSettings.Default.Player1Name;
-                        UserSettings.Default.Save();
-                        cboWhoStarts.SelectedIndex = 0;
-                        break;
-                }
+                UserSettings.Default.WhoStarts = UserSettings.Default.Player1Name;
+                UserSettings.Default.Save();
+                cboWhoStarts.SelectedIndex = 0;
             }
         }
 
@@ -82,7 +85,8 @@ namespace Mancala.Menu
         void cboWhoStarts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UserSettings.Default.WhoStarts = cboWhoStarts.SelectedIndex == 2
-                ? "Alternating" : cboWhoStarts.SelectedItem.ToString();
+                ? MancalaResources.Alternating
+                : cboWhoStarts.SelectedItem.ToString();
             UserSettings.Default.Save();
         }
 
@@ -117,9 +121,9 @@ namespace Mancala.Menu
             if (byte.TryParse(txtStartingStones.Text, out byte number))
             {
                 if (number < 1)
-                    txtStartingStones.Text = "1";
+                    txtStartingStones.Text = 1.ToString();
                 else if (number > 20)
-                    txtStartingStones.Text = "20";
+                    txtStartingStones.Text = 20.ToString();
             }
             else
                 txtStartingStones.Text = "";
@@ -128,7 +132,7 @@ namespace Mancala.Menu
         void txtStartingStones_OnLostFocus(object sender, RoutedEventArgs e)
         {
             UserSettings.Default.NumStartingStones =
-                byte.TryParse(txtStartingStones.Text, out byte number) ? number : (byte)4;
+                byte.TryParse(txtStartingStones.Text, out byte number) ? number : (byte) 4;
             UserSettings.Default.Save();
         }
 
@@ -141,7 +145,7 @@ namespace Mancala.Menu
             if (txtStartingStones.Text != "")
                 return false;
 
-            MessageBox.Show("Enter the number of starting stones per cup.", "Number of Starting Stones Missing");
+            MessageBox.Show(MessageResources.MissingStonesPerCupMessage, MessageResources.MissingStonesPerCupTitle);
             txtStartingStones.Focus();
             return true;
         }

@@ -25,7 +25,6 @@ namespace Mancala.Game
         void InitialiseCupsAndMancalas(byte startingStones)
         {
             cups = new Cup[14];
-
             cups[13] = new Cup(0, Enums.Player.Player1, true, btnPlayer1Mancala,
                 lblPlayer1MancalaStoneText, lblPlayer1MancalaStone0,
                 lblPlayer1MancalaStone1, lblPlayer1MancalaStone2, lblPlayer1MancalaStone3, lblPlayer1MancalaStone4,
@@ -69,7 +68,6 @@ namespace Mancala.Game
                 lblPlayer1Cup5Stone0, lblPlayer1Cup5Stone1, lblPlayer1Cup5Stone2, lblPlayer1Cup5Stone3,
                 lblPlayer1Cup5Stone4, lblPlayer1Cup5Stone5, lblPlayer1Cup5Stone6, lblPlayer1Cup5Stone7,
                 lblPlayer1Cup5Stone8);
-
 
 
             cups[6] = new Cup(0, Enums.Player.Player2, true, btnPlayer2Mancala,
@@ -158,7 +156,7 @@ namespace Mancala.Game
         void CupClick(object sender, MouseButtonEventArgs e)
         {
             DisableAll();
-            centrePage.DisableControls();
+            gameCentrePageGame.DisableControls();
 
             if (chosenCup is null)
                 FindClickedCup(sender);
@@ -168,35 +166,33 @@ namespace Mancala.Game
 
         void FindClickedCup(object sender)
         {
-            if (sender is Label == false)
+            if (!(sender is Label clicked))
             {
-                MessageBox.Show("Clicked cup was not a label.");
+                MessageBox.Show(MessageResources.ClickedCupInvalidMessage, MessageResources.ErrorTitle);
                 return;
             }
 
-            Label clicked = (Label)sender;
-
             for (byte cupNumber = 0; cupNumber < cups.Length; cupNumber++)
             {
-                if (clicked == cups[cupNumber].MainLabel)
+                if (clicked == cups[cupNumber].CupControl)
                 {
                     ChosenCup = cupNumber;
                     return;
                 }
             }
 
-            throw new Exception("Could not find clicked cup.");
+            throw new Exception(MessageResources.ClickedCupInvalidMessage);
         }
 
         public void ChangeSize(BoardSize boardSize)
         {
             foreach (Cup c in cups)
             {
-                c.MainLabel.Width = boardSize.CupSizeAndMancalaWidth;
+                c.CupControl.Width = boardSize.CupSizeAndMancalaWidth;
                 if (c.IsMancala == false)
-                    c.MainLabel.Height = boardSize.CupSizeAndMancalaWidth;
+                    c.CupControl.Height = boardSize.CupSizeAndMancalaWidth;
 
-                foreach (Label stone in c.StoneLabels)
+                foreach (Label stone in c.StoneControls)
                 {
                     stone.Width = boardSize.StoneSize;
                     stone.Height = boardSize.StoneSize;

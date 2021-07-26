@@ -1,34 +1,37 @@
 ﻿Release History:
 
-Version 4.1, released 30 January:
-*Project changed from .NET Framework to .NET Core 3.1.
-*BoardSize constructor uses constants, and seperates equations out, to make the math clearer. (Instead of using hard-coded numbers and comments.)
+Version 4.2 - 26 July 2021:
+*Added ColorScheme class which stores stone and cup colors and borders. This will make it easier to change colors or add other schemes in future.
+*Private constants in BoardSize moved to class scope.
+*Strings moved to resource files.
+*Targets .NET 5.0 and C# 9.0 to take advantage of new() when created type is evident from usage.
 
 
-Version 4.0.1, released 1 December 2019:
+Version 4.1 - 30 January 2020:
+*BoardSize uses constants, and seperates equations out, to make the math clearer. (Instead of using hard-coded numbers and comments.)
+*Rebuilt as a .NET Core 3.1 project.
+
+
+Version 4.0.1 - 1 December 2019:
 *Hotfix - Player 2 being human did not call MoveNextStone();
 
-Version 4.0, released 30 November 2019:
-*Rebuilt in WPF, taking advantage of layout panels, XAML styles, and frames and pages. (Also, high-DPI compatible.)
+Version 4.0 - 30 November 2019:
 *Ability to make the stones, cups and board larger or smaller. (Based around the stone width and height.)
 *Animation-speed options moved to the game page. (Technically, game sub-page).
-
 *Code rebuilt around timers.
 *Code spread across many files.
+*Rebuilt in WPF, taking advantage of layout panels, XAML styles, and frames and pages. (Also, high-DPI compatible.)
 *Thanks to Jetbrains' Resharper for code refactoring and extraction.
-
 
 
 Version 3.0 (2013-2019):
 *Stone "icons" (labels) when fewer than 10 stones in a cup.
 *(Eventually) Customisable animation speed.
 
-
 Version 2.0 (2012):
-*Three difficulty levels, plus checking for capturing or multiple laps (which would become its own difficulty level in version 3).
 *Complete code rewrite.
-*Properties.Settings.Default used.
-
+*Three difficulty levels, plus checking for capturing or multiple laps (which would become its own difficulty level in version 3).
+*UserSettings.Default used.
 
 Version 1.0 (2011):
 Final project for University of Waikato's Introduction to Programming course. (Built in C# WinForms.)

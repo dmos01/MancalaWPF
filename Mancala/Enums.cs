@@ -1,6 +1,8 @@
-﻿namespace Mancala
+﻿using System.Windows.Media;
+
+namespace Mancala
 {
-  public class Enums
+    public class Enums
     {
         public enum Player
         {

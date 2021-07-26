@@ -1,13 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
+
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace Mancala.Menu
 {
     /// <summary>
-    /// Interaction logic for PageSizes.xaml
+    ///     Interaction logic for PageSizes.xaml
     /// </summary>
-    public partial class PageSizes : Page
+    public partial class PageSizes
     {
         readonly WindowMain parentWindow;
 
@@ -18,11 +18,16 @@ namespace Mancala.Menu
             parentWindow = mainWindow;
 
             double stoneSize = UserSettings.Default.StoneSize;
-            if (stoneSize >= BoardSize.MaxStoneSize)
-                btnIncreaseSize.IsEnabled = false;
-            else if (stoneSize <= BoardSize.MinStoneSize)
-                btnDecreaseSize.IsEnabled = false;
 
+            switch (stoneSize)
+            {
+                case >= BoardSize.MaxStoneSize:
+                    btnIncreaseSize.IsEnabled = false;
+                    break;
+                case <= BoardSize.MinStoneSize:
+                    btnDecreaseSize.IsEnabled = false;
+                    break;
+            }
         }
 
         void BtnIncreaseSize_OnClick(object sender, RoutedEventArgs e)

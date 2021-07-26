@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:Mancala.Menu"
       mc:Ignorable="d"
       Title="PageMenuBoard"
       Background="White">
@@ -39,17 +38,17 @@
         <DockPanel x:Name="dockPanelExclMancalas" Width="555" Margin="0,0,8,0">
             <UniformGrid DockPanel.Dock="Top" Name="wrapPlayer2Cups" Columns="6">
                 <Label x:Name="btnNewGameSettings" Style="{StaticResource MenuCupStyle}" MouseDown="BtnNewGameSettings_OnMouseDown">
-                    <TextBlock Text="New Game Settings" Style="{StaticResource ButtonTextStyle}" />
+                    <TextBlock x:Name="textBlockNewGameSettings" Text="New Game Settings" Style="{StaticResource ButtonTextStyle}" />
                 </Label>
                 <Label x:Name="btnPlayerSettings" Style="{StaticResource MenuCupStyle}" MouseDown="BtnPlayerSettings_OnMouseDown">
-                    <TextBlock Text="Player Settings" Style="{StaticResource ButtonTextStyle}" />
+                    <TextBlock x:Name="textBlockPlayerSettings" Text="Player Settings" Style="{StaticResource ButtonTextStyle}" />
                 </Label>
-                <Label x:Name="btnSizes" Style="{StaticResource MenuCupStyle}" MouseDown="BtnSizes_OnMouseDown" >
-                    <TextBlock Text="Size Settings" Style="{StaticResource ButtonTextStyle}" />
+                <Label x:Name="btnSizeSettings" Style="{StaticResource MenuCupStyle}" MouseDown="BtnSizes_OnMouseDown" >
+                    <TextBlock x:Name="textBlockSizeSettings" Text="Size Settings" Style="{StaticResource ButtonTextStyle}" />
                 </Label>
                 <Label x:Name="btnPlayer2Cup2" Style="{StaticResource MenuCupStyle}" />
                 <Label x:Name="btnRules" Style="{StaticResource MenuCupStyle}" MouseDown="BtnRules_OnMouseDown">
-                    <TextBlock Text="Rules" Style="{StaticResource ButtonTextStyle}" />
+                    <TextBlock x:Name="textBlockRules" Text="Rules" Style="{StaticResource ButtonTextStyle}" />
                 </Label>
                 <Label x:Name="btnReturnToGame" Style="{StaticResource MenuCupStyle}" MouseDown="BtnReturnToGame_OnMouseDown">
                     <TextBlock x:Name="textBlockReturnToGame" Text="Return to Game" Style="{StaticResource ButtonTextStyle}"
@@ -62,10 +61,10 @@
                 <Label x:Name="btnPlayer1Cup0" Style="{StaticResource MenuCupStyle}" />
                 <Label x:Name="btnPlayer1Cup1" Style="{StaticResource MenuCupStyle}" />
                 <Label x:Name="btnStartNewGame" Style="{StaticResource MenuCupStyle}" MouseDown="btnStartNewGame_MouseDown">
-                    <TextBlock Text="Start New Game" Style="{StaticResource ButtonTextStyle}" />
+                    <TextBlock x:Name="textBlockStartNewGame" Text="Start New Game" Style="{StaticResource ButtonTextStyle}" />
                 </Label>
                 <Label x:Name="btnResetSettings" Style="{StaticResource MenuCupStyle}" MouseDown="btnResetSettings_MouseDown">
-                    <TextBlock Text="Reset Settings" Style="{StaticResource ButtonTextStyle}" />
+                    <TextBlock x:Name="textBlockResetSettings" Text="Reset Settings" Style="{StaticResource ButtonTextStyle}" />
                 </Label>
                 <Label x:Name="btnPlayer1Cup4" Style="{StaticResource MenuCupStyle}" />
                 <Label x:Name="btnPlayer1Cup5" Style="{StaticResource MenuCupStyle}" />

@@ -2,21 +2,22 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Mancala.Game;
+using System.Windows.Media;
 
 namespace Mancala.Menu
 {
     /// <summary>
-    /// Interaction logic for PageMenuBoard.xaml
+    ///     Interaction logic for PageMenuBoard.xaml
     /// </summary>
-    public partial class PageMenuBoard : Page
+    public partial class PageMenuBoard
     {
         readonly WindowMain parentWindow;
-        Enums.Player whoStartsNextAlternating;
+        Page _currentMenuPage;
+        Enums.Player playerToStart;
         int randomNumber;
 
         /// <summary>
-        /// Setter also navigates to that page.
+        ///     Setter also navigates to that page.
         /// </summary>
         Page CurrentMenuPage
         {
@@ -27,13 +28,97 @@ namespace Mancala.Menu
                 frameMenu.Navigate(_currentMenuPage);
             }
         }
-        Page _currentMenuPage;
+
+        Label[] MenuCups => new[]
+        {
+            btnNewGameSettings,
+            btnPlayerSettings,
+            btnPlayer2Cup2,
+            btnSizeSettings,
+            btnRules,
+            btnReturnToGame,
+
+            btnPlayer1Cup0,
+            btnPlayer1Cup1,
+            btnStartNewGame,
+            btnResetSettings,
+            btnPlayer1Cup4,
+            btnPlayer1Cup5
+        };
 
         private PageMenuBoard()
         {
             InitializeComponent();
-            whoStartsNextAlternating = Enums.Player.Player1;
-            CurrentMenuPage = new PageNewGameSettings(whoStartsNextAlternating);
+            playerToStart = Enums.Player.Player1;
+            CurrentMenuPage = new PageNewGameSettings(playerToStart);
+
+            SolidColorBrush background = ColorScheme.CurrentColorScheme.CupBackgroundColor;
+            SolidColorBrush text = ColorScheme.CurrentColorScheme.EnabledStoneColor;
+            SolidColorBrush border = ColorScheme.CurrentColorScheme.CupBorderColor;
+            Thickness borderThickness = ColorScheme.CurrentColorScheme.CupBorderThickness;
+
+            btnNewGameSettings.Background = background;
+            textBlockNewGameSettings.Foreground = text;
+            btnNewGameSettings.BorderBrush = border;
+            btnNewGameSettings.BorderThickness = borderThickness;
+
+            btnPlayerSettings.Background = background;
+            textBlockPlayerSettings.Foreground = text;
+            btnPlayerSettings.BorderBrush = border;
+            btnPlayerSettings.BorderThickness = borderThickness;
+
+            btnSizeSettings.Background = background;
+            textBlockSizeSettings.Foreground = text;
+            btnSizeSettings.BorderBrush = border;
+            btnSizeSettings.BorderThickness = borderThickness;
+
+            btnPlayer2Cup2.Background = background;
+            btnPlayer2Cup2.BorderBrush = border;
+            btnPlayer2Cup2.BorderThickness = borderThickness;
+
+            btnRules.Background = background;
+            textBlockRules.Foreground = text;
+            btnRules.BorderBrush = border;
+            btnRules.BorderThickness = borderThickness;
+
+            btnReturnToGame.Background = background;
+            textBlockReturnToGame.Foreground = ColorScheme.CurrentColorScheme.DisabledStoneColor;
+            btnReturnToGame.BorderBrush = border;
+            btnReturnToGame.BorderThickness = borderThickness;
+
+            btnPlayer1Cup0.Background = background;
+            btnPlayer1Cup0.BorderBrush = border;
+            btnPlayer1Cup0.BorderThickness = borderThickness;
+
+            btnPlayer1Cup1.Background = background;
+            btnPlayer1Cup1.BorderBrush = border;
+            btnPlayer1Cup1.BorderThickness = borderThickness;
+
+            btnStartNewGame.Background = background;
+            textBlockStartNewGame.Foreground = text;
+            btnStartNewGame.BorderBrush = border;
+            btnStartNewGame.BorderThickness = borderThickness;
+
+            btnResetSettings.Background = background;
+            textBlockResetSettings.Foreground = text;
+            btnResetSettings.BorderBrush = border;
+            btnResetSettings.BorderThickness = borderThickness;
+
+            btnPlayer1Cup4.Background = background;
+            btnPlayer1Cup4.BorderBrush = border;
+            btnPlayer1Cup4.BorderThickness = borderThickness;
+
+            btnPlayer1Cup5.Background = background;
+            btnPlayer1Cup5.BorderBrush = border;
+            btnPlayer1Cup5.BorderThickness = borderThickness;
+
+            btnPlayer1Mancala.Background = background;
+            btnPlayer1Mancala.BorderBrush = border;
+            btnPlayer1Mancala.BorderThickness = borderThickness;
+
+            btnPlayer2Mancala.Background = background;
+            btnPlayer2Mancala.BorderBrush = border;
+            btnPlayer2Mancala.BorderThickness = borderThickness;
         }
 
         public PageMenuBoard(WindowMain parentWindow, BoardSize boardSize) : this()
@@ -47,44 +132,45 @@ namespace Mancala.Menu
             if (TextboxesAreValid() == false)
                 return;
 
-            parentWindow.NewGame(FindWhoStarts());
+            SetPlayerToStart();
+            parentWindow.NewGame(playerToStart);
             btnReturnToGame.IsEnabled = true;
-            textBlockReturnToGame.Foreground = Cup.HighlightedColor;
+            textBlockReturnToGame.Foreground = ColorScheme.CurrentColorScheme.EnabledStoneColor;
         }
 
-        Enums.Player FindWhoStarts()
+        void SetPlayerToStart()
         {
             if (UserSettings.Default.WhoStarts == UserSettings.Default.Player1Name)
-                return Enums.Player.Player1;
-            if (UserSettings.Default.WhoStarts == UserSettings.Default.Player2Name)
-                return Enums.Player.Player2;
+                playerToStart = Enums.Player.Player1;
+            else if (UserSettings.Default.WhoStarts == UserSettings.Default.Player2Name)
+                playerToStart = Enums.Player.Player2;
 
-            switch (UserSettings.Default.WhoStarts)
+            else if (UserSettings.Default.WhoStarts == MancalaResources.Player2HumanDefaultName ||
+                     UserSettings.Default.WhoStarts == MancalaResources.Player2ComputerDefaultName)
             {
-                case "Player 1":
-                case "Player1":
-                    return Enums.Player.Player1;
-                case "Player 2":
-                case "Player2":
-                case "Computer":
-                    return Enums.Player.Player2;
-                case "Alternating":
-                    return whoStartsNextAlternating;
-                case "Random":
-                    Random rand = new Random();
-                    randomNumber = rand.Next(2);
-                    return randomNumber == 0 ? Enums.Player.Player1 : Enums.Player.Player2;
-                default:
-                    UserSettings.Default.WhoStarts = UserSettings.Default.Player1Name;
-                    UserSettings.Default.Save();
-                    return Enums.Player.Player1;
+                playerToStart = Enums.Player.Player2;
+            }
+            else if (UserSettings.Default.WhoStarts.Equals(MancalaResources.Alternating,
+                StringComparison.OrdinalIgnoreCase)) { }
+            else if (UserSettings.Default.WhoStarts.Equals(MancalaResources.Random,
+                StringComparison.OrdinalIgnoreCase))
+            {
+                Random rand = new();
+                randomNumber = rand.Next(2);
+                playerToStart = randomNumber == 0 ? Enums.Player.Player1 : Enums.Player.Player2;
+            }
+            else
+            {
+                UserSettings.Default.WhoStarts = UserSettings.Default.Player1Name;
+                UserSettings.Default.Save();
+                playerToStart = Enums.Player.Player1;
             }
         }
 
         void btnResetSettings_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (MessageBox.Show("Do you want to reset all settings to factory defaults?", "Reset Settings?",
-                    MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+            if (MessageBox.Show(MessageResources.ResetQuestionMessage, MessageResources.ResetQuestionTitle,
+                MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
             {
                 switch (CurrentMenuPage)
                 {
@@ -94,13 +180,14 @@ namespace Mancala.Menu
                     case PagePlayerSettings ps:
                         ps.FocusOnFirstControl();
                         break;
-                    case PageRules r:
+                    case PageRulesAndAbout r:
                         r.FocusOnFirstControl();
                         break;
                     case PageSizes s:
                         s.FocusOnFirstControl();
                         break;
                 }
+
                 return;
             }
 
@@ -114,7 +201,7 @@ namespace Mancala.Menu
             {
                 case PageNewGameSettings ngs:
                     ngs.RemoveAllLostFocusHandlers();
-                    CurrentMenuPage = new PageNewGameSettings(whoStartsNextAlternating);
+                    CurrentMenuPage = new PageNewGameSettings(playerToStart);
                     break;
                 case PagePlayerSettings ps:
                     ps.RemoveAllLostFocusHandlers();
@@ -131,7 +218,7 @@ namespace Mancala.Menu
             if (TextboxesAreValid() == false)
                 return;
 
-            CurrentMenuPage = new PageNewGameSettings(whoStartsNextAlternating);
+            CurrentMenuPage = new PageNewGameSettings(playerToStart);
         }
 
         void BtnPlayerSettings_OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -155,7 +242,7 @@ namespace Mancala.Menu
             if (TextboxesAreValid() == false)
                 return;
 
-            CurrentMenuPage = new PageRules();
+            CurrentMenuPage = new PageRulesAndAbout();
         }
 
         void BtnReturnToGame_OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -185,41 +272,14 @@ namespace Mancala.Menu
             return true;
         }
 
-        public void ShowRules() => CurrentMenuPage = new PageRules();
+        public void ShowRules() => CurrentMenuPage = new PageRulesAndAbout();
 
         public void GameFinished()
         {
-            whoStartsNextAlternating = FindWhoStartedAndGiveOtherPlayer();
-            CurrentMenuPage = new PageNewGameSettings(whoStartsNextAlternating);
+            playerToStart = playerToStart == Enums.Player.Player1 ? Enums.Player.Player2 : Enums.Player.Player1;
+            CurrentMenuPage = new PageNewGameSettings(playerToStart);
             btnReturnToGame.IsEnabled = false;
-            textBlockReturnToGame.Foreground = Cup.UnhighlightedColor;
-        }
-
-        Enums.Player FindWhoStartedAndGiveOtherPlayer()
-        {
-            if (UserSettings.Default.WhoStarts == UserSettings.Default.Player1Name)
-                return Enums.Player.Player2;
-            if (UserSettings.Default.WhoStarts == UserSettings.Default.Player2Name)
-                return Enums.Player.Player1;
-
-            switch (UserSettings.Default.WhoStarts)
-            {
-                case "Player 1":
-                case "Player1":
-                    return Enums.Player.Player2;
-                case "Player 2":
-                case "Player2":
-                case "Computer":
-                    return Enums.Player.Player1;
-                case "Alternating":
-                    return whoStartsNextAlternating == Enums.Player.Player1 ? Enums.Player.Player2 : Enums.Player.Player1;
-                case "Random":
-                    return randomNumber == 0 ? Enums.Player.Player2 : Enums.Player.Player1;
-                default:
-                    UserSettings.Default.WhoStarts = UserSettings.Default.Player1Name;
-                    UserSettings.Default.Save();
-                    return Enums.Player.Player1;
-            }
+            textBlockReturnToGame.Foreground = ColorScheme.CurrentColorScheme.DisabledStoneColor;
         }
 
         public void ChangeSize(BoardSize boardSize)
@@ -235,24 +295,6 @@ namespace Mancala.Menu
             frameMenu.Margin = boardSize.CentreFrameMargin;
             btnPlayer1Mancala.Margin = boardSize.RightMargin;
             dockPanelExclMancalas.Margin = boardSize.RightMargin;
-
         }
-
-        Label[] MenuCups => new[]
-        {
-            btnNewGameSettings,
-            btnPlayerSettings,
-            btnPlayer2Cup2,
-            btnSizes,
-            btnRules,
-            btnReturnToGame,
-
-            btnPlayer1Cup0,
-            btnPlayer1Cup1,
-            btnStartNewGame,
-            btnResetSettings,
-            btnPlayer1Cup4,
-            btnPlayer1Cup5
-        };
     }
 }

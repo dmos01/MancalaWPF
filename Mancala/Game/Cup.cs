@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -6,28 +7,33 @@ using System.Windows.Media;
 namespace Mancala.Game
 {
     /// <summary>
-    /// Handles controls and properties for cups and Mancalas. Is not itself a custom control.
+    ///     Handles controls and properties for cups and Mancalas. Is not itself a custom control.
     /// </summary>
     class Cup
     {
-        public static SolidColorBrush HighlightedColor { get; } = new SolidColorBrush(Colors.Lime);
+        // ReSharper disable once InconsistentNaming
+        bool _isHighlighted;
 
-        public static SolidColorBrush UnhighlightedColor { get; } = new SolidColorBrush(Colors.Black);
-
-        public static SolidColorBrush BackgroundColor { get; } = new SolidColorBrush(Colors.SaddleBrown);
-
+        byte numberOfStones;
 
         public Enums.Player OwnedBy { get; }
 
         public bool IsMancala { get; }
 
-        public Label MainLabel { get; }
+        /// <summary>
+        /// The label that represents the visible cup.
+        /// </summary>
+        public Label CupControl { get; }
 
+        /// <summary>
+        /// The label that represents the number of stones when that number is too large to display individual controls.
+        /// </summary>
         public Label StoneTextLabel { get; }
 
-        public Label[] StoneLabels { get; }
-
-        byte numberOfStones;
+        /// <summary>
+        /// The labels that represent the visible stones.
+        /// </summary>
+        public Label[] StoneControls { get; }
 
         public byte NumberOfStones
         {
@@ -41,25 +47,19 @@ namespace Mancala.Game
                   Or, this could be triggered with NumberOfStones--.*/
                 if (value > 241)
                 {
-                    MessageBox.Show("The program tried to move a stone from a cup with no stones. Press OK to quit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new OverflowException("The program tried to move a stone from a cup with no stones.");
+                    MessageBox.Show(MessageResources.CupHasNoStonesMessage, MessageResources.ErrorTitle,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    throw new OverflowException(MessageResources.CupHasNoStonesMessage);
                 }
+
                 numberOfStones = value;
             }
         }
 
-        public void EnableAndHighlight()
-        {
-            if (numberOfStones == 0)
-                return;
-
-            IsEnabled = true;
-            IsHighlighted = true;
-        }
-
         public bool IsEnabled
         {
-            get => MainLabel.IsEnabled;
+            get => CupControl.IsEnabled;
             set
             {
                 if (value && numberOfStones == 0)
@@ -68,12 +68,10 @@ namespace Mancala.Game
                     return;
                 }
 
-                MainLabel.IsEnabled = value;
+                CupControl.IsEnabled = value;
             }
         }
 
-        // ReSharper disable once InconsistentNaming
-        bool _isHighlighted;
         public bool IsHighlighted
         {
             get => _isHighlighted;
@@ -91,14 +89,26 @@ namespace Mancala.Game
                     }
 
                     _isHighlighted = true;
-                    StoneTextLabel.Foreground = HighlightedColor;
-                    Array.ForEach(StoneLabels, stone => stone.Background = HighlightedColor);
+                    SolidColorBrush color = ColorScheme.CurrentColorScheme.EnabledStoneColor;
+                    SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.EnabledStoneBorderColor;
+                    StoneTextLabel.Foreground = color;
+                    foreach (Label stone in StoneControls)
+                    {
+                        stone.Background = color;
+                        stone.BorderBrush = borderColor;
+                    }
                 }
                 else
                 {
                     _isHighlighted = false;
-                    StoneTextLabel.Foreground = UnhighlightedColor;
-                    Array.ForEach(StoneLabels, x => x.Background = UnhighlightedColor);
+                    SolidColorBrush color = ColorScheme.CurrentColorScheme.DisabledStoneColor;
+                    SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.DisabledStoneBorderColor;
+                    StoneTextLabel.Foreground = color;
+                    foreach (Label stone in StoneControls)
+                    {
+                        stone.Background = color;
+                        stone.BorderBrush = borderColor;
+                    }
                 }
             }
         }
@@ -107,60 +117,80 @@ namespace Mancala.Game
         public Cup(Enums.Player ownedBy, bool isMancala, Label mainLabel, Label stoneTextLabel,
             params Label[] stoneLabels) : this(0, ownedBy, isMancala, mainLabel, stoneTextLabel, stoneLabels) { }
 
-        public Cup(byte numberOfStones, Enums.Player ownedBy, bool isMancala, Label mainLabel,
-            Label stoneTextLabel, params Label[] stoneLabels)
+        public Cup(byte numberOfStones, Enums.Player ownedBy, bool isMancala, Label cupControl,
+            Label stoneTextLabel, params Label[] stoneControls)
         {
             OwnedBy = ownedBy;
             IsMancala = isMancala;
-            MainLabel = mainLabel;
+            CupControl = cupControl;
             StoneTextLabel = stoneTextLabel;
-            StoneLabels = stoneLabels;
+            StoneControls = stoneControls;
             NumberOfStones = numberOfStones;
 
             UpdateVisibleStonesToMatchNumberOfStones();
 
-            MainLabel.IsEnabled = false;
+            CupControl.IsEnabled = false;
             StoneTextLabel.IsEnabled = false;
 
-            StoneTextLabel.Foreground = UnhighlightedColor;
-            foreach (Label label in StoneLabels)
+            CupControl.Background = ColorScheme.CurrentColorScheme.CupBackgroundColor;
+            CupControl.BorderBrush = ColorScheme.CurrentColorScheme.CupBorderColor;
+            CupControl.BorderThickness = ColorScheme.CurrentColorScheme.CupBorderThickness;
+
+            SolidColorBrush color = ColorScheme.CurrentColorScheme.DisabledStoneColor;
+            SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.DisabledStoneBorderColor;
+            Thickness borderThickness = ColorScheme.CurrentColorScheme.StoneBorderThickness;
+            StoneTextLabel.Foreground = color;
+            foreach (Label stone in StoneControls)
             {
-                label.IsEnabled = false;
-                label.Background = UnhighlightedColor;
+                stone.IsEnabled = false;
+                stone.Background = color;
+                stone.BorderBrush = borderColor;
+                stone.BorderThickness = borderThickness;
             }
+        }
+
+        public void EnableAndHighlight()
+        {
+            if (numberOfStones == 0)
+                return;
+
+            IsEnabled = true;
+            IsHighlighted = true;
         }
 
         public override string ToString()
         {
-            string output = OwnedBy.ToString();
-            output += IsMancala ? " Mancala. " : " cup. ";
-            output += NumberOfStones;
-            output += NumberOfStones == 1 ? " stone." : " stones.";
+            StringBuilder cupInfo = new();
+            cupInfo.Append(OwnedBy.ToString());
+            cupInfo.Append(IsMancala ? InternalCupInfoResources.Mancala : InternalCupInfoResources.Cup);
+            cupInfo.Append(NumberOfStones);
+            cupInfo.Append(NumberOfStones == 1 ? MessageResources.StoneSingular : MessageResources.StonesPlural);
 
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (IsEnabled && IsHighlighted)
-                return output + " Enabled and highlighted.";
+                cupInfo.Append(InternalCupInfoResources.EnabledAndHighlighted);
             else if (IsEnabled)
-                return output + " Enabled.";
-            else if (IsHighlighted)
-                return output + " Highlighted.";
+                cupInfo.Append(InternalCupInfoResources.Enabled);
             else
-                return output;
+                cupInfo.Append(InternalCupInfoResources.Highlighted);
+
+            return cupInfo.ToString();
         }
 
         public void UpdateVisibleStonesToMatchNumberOfStones()
         {
-            if (NumberOfStones <= StoneLabels.Length)
+            if (NumberOfStones <= StoneControls.Length)
             {
                 for (byte stone = 0; stone < NumberOfStones; stone++)
-                    StoneLabels[stone].Visibility = Visibility.Visible;
+                    StoneControls[stone].Visibility = Visibility.Visible;
 
-                for (byte stone = NumberOfStones; stone < StoneLabels.Length; stone++)
-                    StoneLabels[stone].Visibility = Visibility.Hidden;
+                for (byte stone = NumberOfStones; stone < StoneControls.Length; stone++)
+                    StoneControls[stone].Visibility = Visibility.Hidden;
                 StoneTextLabel.Content = "";
             }
             else
             {
-                Array.ForEach(StoneLabels, stone => stone.Visibility = Visibility.Collapsed);
+                Array.ForEach(StoneControls, stone => stone.Visibility = Visibility.Collapsed);
                 StoneTextLabel.Content = NumberOfStones;
             }
         }

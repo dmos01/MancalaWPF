@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Threading;
-
 
 namespace Mancala.Game
 {
     public partial class PageGameBoard
     {
-        bool requireMultipleLaps;
-        bool requireExtraTurn;
-        byte stonesToMove;
-        int sowInto;
         Cup chosenCup;
         int chosenCupIndex;
+        bool requireExtraTurn;
+        bool requireMultipleLaps;
+        int sowInto;
+        byte stonesToMove;
+
         int ChosenCup
         {
             set
@@ -22,7 +23,8 @@ namespace Mancala.Game
             }
         }
 
-        public bool CurrentPlayerIsHuman => currentPlayer == Enums.Player.Player1 || player2Type == Enums.PlayerType.Human;
+        public bool CurrentPlayerIsHuman =>
+            currentPlayer == Enums.Player.Player1 || player2Type == Enums.PlayerType.Human;
 
         void StartNewTurnAndUnhighlightPreviousChosenCupIfApplicable(bool withNewPlayer)
         {
@@ -31,7 +33,8 @@ namespace Mancala.Game
             if (withNewPlayer)
             {
                 currentPlayer = currentPlayer == Enums.Player.Player1
-                    ? Enums.Player.Player2 : Enums.Player.Player1;
+                    ? Enums.Player.Player2
+                    : Enums.Player.Player1;
 
                 //There was a chosen cup from previous turn. Does not cover the computer getting another turn — handled below.
                 if (chosenCup != null)
@@ -43,8 +46,8 @@ namespace Mancala.Game
                 ChosenCup = -1;
                 UpdatePositionsOfAllStones();
                 EnableAndHighlightPlayer1Cups();
-                centrePage.ChangePlayerTurnText(Enums.Player.Player1);
-                centrePage.EnableControls();
+                gameCentrePageGame.ChangePlayerTurnText(Enums.Player.Player1);
+                gameCentrePageGame.EnableControls();
             }
             else
             {
@@ -53,8 +56,8 @@ namespace Mancala.Game
                     ChosenCup = -1;
                     UpdatePositionsOfAllStones();
                     EnableAndHighlightPlayer2Cups();
-                    centrePage.ChangePlayerTurnText(Enums.Player.Player2);
-                    centrePage.EnableControls();
+                    gameCentrePageGame.ChangePlayerTurnText(Enums.Player.Player2);
+                    gameCentrePageGame.EnableControls();
                 }
                 else
                 {
@@ -66,7 +69,7 @@ namespace Mancala.Game
                         if (withNewPlayer == false && chosenCup != null)
                             chosenCup.IsHighlighted = false;
 
-                        centrePage.ChangePlayerTurnText(Enums.Player.Player2);
+                        gameCentrePageGame.ChangePlayerTurnText(Enums.Player.Player2);
                         UpdatePositionsOfAllStones();
                     }
 
@@ -76,7 +79,7 @@ namespace Mancala.Game
         }
 
         /// <summary>
-        /// Also calls MoveNextStone(), starting movement.
+        ///     Also calls MoveNextStone(), starting movement.
         /// </summary>
         void ShowChosenCupAndPrepareToSow()
         {
@@ -89,20 +92,21 @@ namespace Mancala.Game
             {
                 if (Animation.HumanAnimationIsOn)
                 {
-                    centrePage.DisableControls();
+                    gameCentrePageGame.DisableControls();
                     UnhighlightPlayer1Cups(true);
                 }
                 else if (player2Type == Enums.PlayerType.Human)
                 {
                     //No animation, but next player is human.
-                    centrePage.DisableControls();
+                    gameCentrePageGame.DisableControls();
                     UnhighlightPlayer1Cups(false);
                 }
                 else if (Animation.ComputerAnimationIsOn)
                 {
-                    centrePage.DisableControls();
+                    gameCentrePageGame.DisableControls();
                     UnhighlightPlayer1Cups(false);
                 }
+
                 //No animation will occur before Player 1's next turn — there is no
                 //human animation, player 2 is not human and there is no computer animation.
                 MoveNextStone();
@@ -111,8 +115,8 @@ namespace Mancala.Game
             {
                 if (player2Type == Enums.PlayerType.Human)
                 {
-                    centrePage.DisableControls();
-                    UnhighlightPlayer2Cups(exceptChosenCup: Animation.HumanAnimationIsOn);
+                    gameCentrePageGame.DisableControls();
+                    UnhighlightPlayer2Cups(Animation.HumanAnimationIsOn);
                     MoveNextStone();
                 }
                 else if (Animation.ComputerAnimationIsOn)
@@ -122,7 +126,7 @@ namespace Mancala.Game
 
                     void Tick(object sender, EventArgs e)
                     {
-                        ((DispatcherTimer)sender)?.Stop();
+                        ((DispatcherTimer) sender)?.Stop();
                         MoveNextStone();
                     }
                 }
@@ -145,7 +149,6 @@ namespace Mancala.Game
                         if (stonesToMove == 0)
                             requireExtraTurn = true;
                         MoveStone(0);
-
                     }
                     else //Player 2 skips Player 1's Mancala.
                     {
@@ -160,7 +163,6 @@ namespace Mancala.Game
                         if (stonesToMove == 0)
                             requireExtraTurn = true;
                         MoveStone(7);
-
                     }
                     else //Player 1 skips 2's Mancala.
                     {
@@ -207,7 +209,7 @@ namespace Mancala.Game
 
             void Tick(object sender, EventArgs e)
             {
-                ((DispatcherTimer)sender)?.Stop();
+                ((DispatcherTimer) sender)?.Stop();
                 sowInto = nextSowInto;
 
                 if (stonesToMove == 0)
@@ -218,7 +220,7 @@ namespace Mancala.Game
         }
 
         /// <summary>
-        /// Includes testing if Multiple Laps required.
+        ///     Includes testing if Multiple Laps required.
         /// </summary>
         void EndOfLap()
         {
@@ -280,7 +282,7 @@ namespace Mancala.Game
 
             void Tick(object sender, EventArgs e)
             {
-                ((DispatcherTimer)sender)?.Stop();
+                ((DispatcherTimer) sender)?.Stop();
                 ShowChosenCupAndPrepareToSow();
             }
         }
@@ -361,14 +363,33 @@ namespace Mancala.Game
 
         void ShowWinnerMessageBox()
         {
+            if (GetPlayer1Score == GetPlayer2Score)
+            {
+                MessageBox.Show(MessageResources.TieMessage, MessageResources.TieTitle);
+                return;
+            }
+
+            StringBuilder message = new();
+            string caption;
+            int difference;
+
             if (GetPlayer1Score > GetPlayer2Score)
-                MessageBox.Show(player1Name + " wins the game by " + (GetPlayer1Score - GetPlayer2Score) + " stones.",
-                    player1Name + " Wins");
-            else if (GetPlayer2Score > GetPlayer1Score)
-                MessageBox.Show(player2Name + " wins the game by " + (GetPlayer2Score - GetPlayer1Score) + " stones.",
-                    player2Name + " Wins");
-            else if (GetPlayer1Score == GetPlayer2Score)
-                MessageBox.Show("The game has ended in a tie.", "Game Over");
+            {
+                message.Append(player1Name);
+                caption = player1Name + MessageResources.WinTitleSuffix;
+                difference = GetPlayer1Score - GetPlayer2Score;
+            }
+            else
+            {
+                message.Append(player2Name);
+                caption = player2Name + MessageResources.WinTitleSuffix;
+                difference = GetPlayer2Score - GetPlayer1Score;
+            }
+
+            message.Append(MessageResources.WinTextPrefix);
+            message.Append(difference.ToString());
+            message.Append(difference == 1 ? MessageResources.StoneSingular : MessageResources.StonesPlural);
+            MessageBox.Show(message.ToString(), caption);
         }
     }
 }

@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Mancala.Game
 {
     /// <summary>
-    /// Interaction logic for PageGameBoard.xaml
+    ///     Interaction logic for PageGameBoard.xaml
     /// </summary>
-    public partial class PageGameBoard : Page
+    public partial class PageGameBoard
     {
+        readonly PageGameCentre gameCentrePageGame;
         readonly WindowMain parentWindow;
-        readonly PageCentre centrePage;
+
+        readonly Enums.PlayerType player2Type;
+
+
+        Enums.Player currentPlayer;
 
         bool capturing { get; } = UserSettings.Default.Capturing;
 
@@ -18,14 +22,9 @@ namespace Mancala.Game
 
         bool emptyPlayerGetsRemainingStones { get; } = UserSettings.Default.PlayerWithEmptySideGetsRemainingStones;
 
-        readonly Enums.PlayerType player2Type;
-
         string player1Name { get; } = UserSettings.Default.Player1Name;
 
         string player2Name { get; } = UserSettings.Default.Player2Name;
-
-
-        Enums.Player currentPlayer;
 
         private PageGameBoard()
         {
@@ -44,13 +43,13 @@ namespace Mancala.Game
             }
 
             parentWindow = mainWindow;
-            centrePage = new PageCentre(mainWindow, player2Type);
+            gameCentrePageGame = new PageGameCentre(mainWindow, player2Type);
             if (boardSize != null)
                 ChangeSize(boardSize);
             currentPlayer = whoStarts;
             StartNewTurnAndUnhighlightPreviousChosenCupIfApplicable(false);
         }
 
-        void PageBoard_OnLoaded(object sender, RoutedEventArgs e) => frameCentre.Navigate(centrePage);
+        void PageBoard_OnLoaded(object sender, RoutedEventArgs e) => frameCentre.Navigate(gameCentrePageGame);
     }
 }

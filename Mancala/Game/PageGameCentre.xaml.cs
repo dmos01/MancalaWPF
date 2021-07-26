@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Mancala.Game
 {
     /// <summary>
-    /// Interaction logic for PageCentre.xaml
+    ///     Interaction logic for PageGameCentre.xaml
     /// </summary>
-    public partial class PageCentre : Page
+    public partial class PageGameCentre
     {
+        readonly WindowMain parentWindow;
         string player1TurnText;
         string player2TurnText;
-        readonly WindowMain parentWindow;
 
-        private PageCentre() => InitializeComponent();
+        private PageGameCentre() => InitializeComponent();
 
-        public PageCentre(WindowMain mainWindow, Enums.PlayerType player2Type) : this()
+        public PageGameCentre(WindowMain mainWindow, Enums.PlayerType player2Type) : this()
         {
             parentWindow = mainWindow;
             SetText();
@@ -26,29 +26,28 @@ namespace Mancala.Game
 
         void SetText()
         {
-            string remainingStonesText = "When one player's side is empty,\r\n";
-            remainingStonesText += UserSettings.Default.PlayerWithEmptySideGetsRemainingStones
-                ? "they get the remaining stones."
-                : "the other gets the remaining stones.";
-            textBlockWhoGetsRemainingStones.Text = remainingStonesText;
+            textBlockWhoGetsRemainingStones.Text = UserSettings.Default.PlayerWithEmptySideGetsRemainingStones
+                ? GameInfoResources.PlayerWithEmptySideGetsStones
+                : GameInfoResources.PlayerWithNonEmptySideGetsStones;
 
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (UserSettings.Default.Capturing && UserSettings.Default.MultipleLaps)
             {
                 lblAdditionalRulesCheck.Visibility = Visibility.Visible;
                 lblAdditionalRules.Visibility = Visibility.Visible;
-                lblAdditionalRules.Content = "Capturing and multiple laps.";
+                lblAdditionalRules.Content = GameInfoResources.CapturingAndMultipleLaps;
             }
             else if (UserSettings.Default.Capturing)
             {
                 lblAdditionalRulesCheck.Visibility = Visibility.Visible;
                 lblAdditionalRules.Visibility = Visibility.Visible;
-                lblAdditionalRules.Content = "Capturing.";
+                lblAdditionalRules.Content = GameInfoResources.Capturing;
             }
             else if (UserSettings.Default.MultipleLaps)
             {
                 lblAdditionalRulesCheck.Visibility = Visibility.Visible;
                 lblAdditionalRules.Visibility = Visibility.Visible;
-                lblAdditionalRules.Content = "Multiple laps.";
+                lblAdditionalRules.Content = GameInfoResources.MultipleLaps;
             }
             else
             {
@@ -58,7 +57,7 @@ namespace Mancala.Game
         }
 
 
-        //In PageCentre because PageCentre is the lowest page to be created.
+        //In PageGameCentre because PageGameCentre is the lowest page to be created.
         void SetAnimation()
         {
             Animation.HumanTimeSpan = UserSettings.Default.HumanAnimationSpeed;
@@ -74,31 +73,42 @@ namespace Mancala.Game
 
         void SetPlayerNames(Enums.PlayerType player2Type)
         {
+            StringBuilder playerInfo = new();
+
             string player1Name = UserSettings.Default.Player1Name;
-            player1TurnText = player1Name.EndsWith("s")
-                ? player1Name + "' turn."
-                : player1Name + "'s turn.";
-
             string player2Name = UserSettings.Default.Player2Name;
-            player2TurnText = player2Name.EndsWith("s")
-                  ? player2Name + "' turn."
-                  : player2Name + "'s turn.";
+            playerInfo.Append(player1Name);
+            playerInfo.Append(GameInfoResources.Versus);
+            playerInfo.Append(player2Name);
 
-            string player2NamePlusDescription;
+            player1TurnText = player1Name.EndsWith(GameInfoResources.PlayerNameEndsWithSText)
+                ? player1Name + GameInfoResources.TurnSuffixWhenNameEndsWithS
+                : player1Name + GameInfoResources.TurnSuffix;
+
+            player2TurnText = player2Name.EndsWith(GameInfoResources.PlayerNameEndsWithSText)
+                ? player2Name + GameInfoResources.TurnSuffixWhenNameEndsWithS
+                : player2Name + GameInfoResources.TurnSuffix;
+
             switch (player2Type)
             {
                 case Enums.PlayerType.Human:
-                    player2NamePlusDescription = player2Name + ".";
+                    playerInfo.Append(MancalaResources.EndOfSentence);
+                    break;
+                case Enums.PlayerType.Easy:
+                    playerInfo.Append(GameInfoResources.EasyDifficulty);
+                    break;
+                case Enums.PlayerType.Normal:
+                    playerInfo.Append(GameInfoResources.NormalDifficulty);
+                    break;
+                case Enums.PlayerType.Hard:
+                    playerInfo.Append(GameInfoResources.HardDifficulty);
                     break;
                 case Enums.PlayerType.VeryHard:
-                    player2NamePlusDescription = player2Name + " (Very Hard).";
-                    break;
-                default:
-                    player2NamePlusDescription = player2Name + " (" + player2Type + ").";
+                    playerInfo.Append(GameInfoResources.VeryHardDifficulty);
                     break;
             }
 
-            textBlockPlayerNames.Text = player1Name + " vs. " + player2NamePlusDescription;
+            textBlockPlayerNames.Text = playerInfo.ToString();
         }
 
         void BtnOpenMenu_OnClick(object sender, RoutedEventArgs e)
@@ -114,7 +124,7 @@ namespace Mancala.Game
 
         void SliderHumanAnimationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            TimeSpan speed = GetAnimationTimeSpanFromSliderValue((byte)sliderHumanAnimationSpeed.Value);
+            TimeSpan speed = GetAnimationTimeSpanFromSliderValue((byte) sliderHumanAnimationSpeed.Value);
             UserSettings.Default.HumanAnimationSpeed = speed;
             UserSettings.Default.Save();
             Animation.HumanTimeSpan = speed;
@@ -122,7 +132,7 @@ namespace Mancala.Game
 
         void SliderComputerAnimationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            TimeSpan speed = GetAnimationTimeSpanFromSliderValue((byte)sliderComputerAnimationSpeed.Value);
+            TimeSpan speed = GetAnimationTimeSpanFromSliderValue((byte) sliderComputerAnimationSpeed.Value);
             UserSettings.Default.ComputerAnimationSpeed = speed;
             UserSettings.Default.Save();
             Animation.ComputerTimeSpan = speed;

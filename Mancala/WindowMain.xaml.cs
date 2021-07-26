@@ -1,19 +1,20 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 using Mancala.Game;
 using Mancala.Menu;
 
 namespace Mancala
 {
     /// <summary>
-    /// Interaction logic for WindowMain.xaml
+    ///     Interaction logic for WindowMain.xaml
     /// </summary>
-    public partial class WindowMain : Window
+    public partial class WindowMain
     {
         readonly PageMenuBoard menuBoard;
+        BoardSize boardSize;
         PageGameBoard gameBoard;
         bool inGame;
-        BoardSize boardSize;
 
         public WindowMain()
         {

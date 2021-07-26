@@ -1,12 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System;
+using System.Windows;
 
 namespace Mancala.Menu
 {
     /// <summary>
-    /// Interaction logic for PagePlayerSettings.xaml
+    ///     Interaction logic for PagePlayerSettings.xaml
     /// </summary>
-    public partial class PagePlayerSettings : Page
+    public partial class PagePlayerSettings
     {
         public const byte MaxNameLength = 25;
 
@@ -18,14 +18,14 @@ namespace Mancala.Menu
             txtPlayer1Name.Text = UserSettings.Default.Player1Name;
             txtPlayer2Name.Text = UserSettings.Default.Player2Name;
 
-            if (System.Enum.TryParse(UserSettings.Default.Player2Type, out Enums.PlayerType player2) == false)
+            if (Enum.TryParse(UserSettings.Default.Player2Type, out Enums.PlayerType player2) == false)
             {
                 player2 = Enums.PlayerType.Normal;
                 UserSettings.Default.Player2Type = player2.ToString();
                 UserSettings.Default.Save();
             }
 
-            sliderPlayer2Is.Value = (double)player2;
+            sliderPlayer2Is.Value = (double) player2;
             sliderPlayer2Is.ValueChanged += SliderPlayer2Is_OnValueChanged;
             txtPlayer1Name.Focus();
         }
@@ -34,14 +34,14 @@ namespace Mancala.Menu
         {
             if (txtPlayer1Name.Text == "")
             {
-                MessageBox.Show("Enter a name for player 1.", "Player 1 Name Missing");
+                MessageBox.Show(MessageResources.Player1NameMissingMessage, MessageResources.PlayerNameMissingTitle);
                 txtPlayer1Name.Focus();
                 return true;
             }
 
             if (txtPlayer2Name.Text == "")
             {
-                MessageBox.Show("Enter a name for player 2.", "Player 2 Name Missing");
+                MessageBox.Show(MessageResources.Player2NameMissingMessage, MessageResources.PlayerNameMissingTitle);
                 txtPlayer2Name.Focus();
                 return true;
             }
@@ -78,23 +78,25 @@ namespace Mancala.Menu
 
         void SliderPlayer2Is_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (sliderPlayer2Is.Value == 0)
+            //Change name if currently a default name.
+
+            if (sliderPlayer2Is.Value == 0) //Human
             {
-                if (txtPlayer2Name.Text == "Computer")
+                if (txtPlayer1Name.Text == MancalaResources.Player2ComputerDefaultName)
                 {
-                    txtPlayer2Name.Text = "Player 2";
-                    UserSettings.Default.Player2Name = "Player 2";
+                    txtPlayer2Name.Text = MancalaResources.Player2HumanDefaultName;
+                    UserSettings.Default.Player2Name = MancalaResources.Player2HumanDefaultName;
                     UserSettings.Default.Save();
                 }
             }
-            else if (txtPlayer2Name.Text == "Player 2")
+            else if (txtPlayer2Name.Text == MancalaResources.Player2HumanDefaultName)
             {
-                txtPlayer2Name.Text = "Computer";
-                UserSettings.Default.Player2Name = "Computer";
+                txtPlayer2Name.Text = MancalaResources.Player2ComputerDefaultName;
+                UserSettings.Default.Player2Name = MancalaResources.Player2ComputerDefaultName;
                 UserSettings.Default.Save();
             }
 
-            UserSettings.Default.Player2Type = ((Enums.PlayerType)sliderPlayer2Is.Value).ToString();
+            UserSettings.Default.Player2Type = ((Enums.PlayerType) sliderPlayer2Is.Value).ToString();
             UserSettings.Default.Save();
         }
     }

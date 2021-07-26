@@ -5,8 +5,8 @@ namespace Mancala.Game
 {
     public partial class PageGameBoard
     {
-        byte[] testCups;
         byte tempChosenCup; //In case multiple capturing opportunities are available.
+        byte[] testCups;
 
         void ChooseComputerCup()
         {
@@ -37,7 +37,7 @@ namespace Mancala.Game
             if (chosenCup == null)
                 Random();
 
-            CupClick(chosenCup.MainLabel, null);
+            CupClick(chosenCup.CupControl, null);
         }
 
         void SearchForFreeTurn()
@@ -145,7 +145,7 @@ namespace Mancala.Game
             //In this case, cups with 1-3 stones are given 1 weight, 4-6 are given 2, etc.
             //(Higher weights better.) This gives more variance.
 
-            List<byte> weightedCupNumbers = new List<byte>();
+            List<byte> weightedCupNumbers = new();
 
             for (byte cup = 5; cup != 255; cup--)
             {
@@ -177,7 +177,7 @@ namespace Mancala.Game
         }
 
         /// <summary>
-        /// Returns true if the lap ends in a Mancala.
+        ///     Returns true if the lap ends in a Mancala.
         /// </summary>
         /// <param name="testChosenCup"></param>
         /// <returns></returns>
@@ -194,21 +194,24 @@ namespace Mancala.Game
                     testCups[0]++;
                     sowInto = 1;
                     break;
-                case 6 when currentPlayer == Enums.Player.Player2:
-                    {
-                        if (stonesToMove == 0)
-                            return true;
 
-                        if (stonesToMove > 0)
-                        {
+                case 6 when currentPlayer == Enums.Player.Player2:
+                {
+                    switch (stonesToMove)
+                    {
+                        case 0:
+                            return true;
+                        case > 0:
                             stonesToMove--;
                             testCups[testChosenCup]--;
                             testCups[7]++;
                             sowInto = 8;
-                        }
-
-                        break;
+                            break;
                     }
+
+                    break;
+                }
+
                 case 6:
                     testCups[6]++;
                     sowInto = 7;

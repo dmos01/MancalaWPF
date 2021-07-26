@@ -2,16 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>Mancala.App</StartupObject>
     <ApplicationIcon>Green Stone.ico</ApplicationIcon>
-    <Version>4.1.0</Version>
+    <Version>4.2.0.4</Version>
     <Authors>Daniel Spencer</Authors>
     <Product>Mancala WPF</Product>
     <Copyright></Copyright>
-    <AssemblyVersion>4.1.0.3</AssemblyVersion>
-    <FileVersion>4.1.0.3</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,11 +25,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Game\PageCentre.xaml.cs">
-      <DependentUpon>PageCentre.xaml</DependentUpon>
+    <Compile Update="MessageResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MessageResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Game\GameInfoResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GameInfoResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Game\InternalCupInfoResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InternalCupInfoResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Game\PageGameCentre.xaml.cs">
+      <DependentUpon>PageGameCentre.xaml</DependentUpon>
     </Compile>
     <Compile Update="Game\PageGameBoard.xaml.cs">
       <DependentUpon>PageGameBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MancalaResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MancalaResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Menu\PageMenuBoard.xaml.cs">
       <DependentUpon>PageMenuBoard.xaml</DependentUpon>
@@ -42,8 +60,8 @@
     <Compile Update="Menu\PagePlayerSettings.xaml.cs">
       <DependentUpon>PagePlayerSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Menu\PageRules.xaml.cs">
-      <DependentUpon>PageRules.xaml</DependentUpon>
+    <Compile Update="Menu\PageRulesAndAbout.xaml.cs">
+      <DependentUpon>PageRulesAndAbout.xaml</DependentUpon>
     </Compile>
     <Compile Update="Menu\PageSizes.xaml.cs">
       <DependentUpon>PageSizes.xaml</DependentUpon>
@@ -59,6 +77,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="MessageResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Game\GameInfoResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GameInfoResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Game\InternalCupInfoResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InternalCupInfoResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MancalaResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MancalaResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="UserSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
@@ -66,7 +103,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Game\PageCentre.xaml">
+    <Page Update="Game\PageGameCentre.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Game\PageGameBoard.xaml">
@@ -81,7 +118,7 @@
     <Page Update="Menu\PagePlayerSettings.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Menu\PageRules.xaml">
+    <Page Update="Menu\PageRulesAndAbout.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Menu\PageSizes.xaml">
