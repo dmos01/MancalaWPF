@@ -156,7 +156,7 @@ namespace Mancala.Game
         void CupClick(object sender, MouseButtonEventArgs e)
         {
             DisableAll();
-            gameCentrePageGame.DisableControls();
+            gameCenterPageGame.DisableControls();
 
             if (chosenCup is null)
                 FindClickedCup(sender);
@@ -200,7 +200,7 @@ namespace Mancala.Game
             }
 
             dockPanelExclMancalas.Width = boardSize.PlayerSideWidth;
-            frameCentre.Margin = boardSize.CentreFrameMargin;
+            frameCenter.Margin = boardSize.CenterFrameMargin;
             btnPlayer1Mancala.Margin = boardSize.RightMargin;
             dockPanelExclMancalas.Margin = boardSize.RightMargin;
         }

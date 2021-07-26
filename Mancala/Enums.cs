@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace Mancala
+﻿namespace Mancala
 {
     public class Enums
     {

@@ -299,7 +299,7 @@
                 </Label>
             </UniformGrid>
 
-            <Frame x:Name="frameCentre" BorderBrush="Black" BorderThickness="0.5" Margin="6,10,6,10" MinHeight="200" NavigationUIVisibility="Hidden" />
+            <Frame x:Name="frameCenter" BorderBrush="Black" BorderThickness="0.5" Margin="6,10,6,10" MinHeight="200" NavigationUIVisibility="Hidden" />
         </DockPanel>
 
         <Label x:Name="btnPlayer2Mancala" Style="{StaticResource MancalaStyle}">

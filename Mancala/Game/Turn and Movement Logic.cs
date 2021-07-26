@@ -46,8 +46,8 @@ namespace Mancala.Game
                 ChosenCup = -1;
                 UpdatePositionsOfAllStones();
                 EnableAndHighlightPlayer1Cups();
-                gameCentrePageGame.ChangePlayerTurnText(Enums.Player.Player1);
-                gameCentrePageGame.EnableControls();
+                gameCenterPageGame.ChangePlayerTurnText(Enums.Player.Player1);
+                gameCenterPageGame.EnableControls();
             }
             else
             {
@@ -56,8 +56,8 @@ namespace Mancala.Game
                     ChosenCup = -1;
                     UpdatePositionsOfAllStones();
                     EnableAndHighlightPlayer2Cups();
-                    gameCentrePageGame.ChangePlayerTurnText(Enums.Player.Player2);
-                    gameCentrePageGame.EnableControls();
+                    gameCenterPageGame.ChangePlayerTurnText(Enums.Player.Player2);
+                    gameCenterPageGame.EnableControls();
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace Mancala.Game
                         if (withNewPlayer == false && chosenCup != null)
                             chosenCup.IsHighlighted = false;
 
-                        gameCentrePageGame.ChangePlayerTurnText(Enums.Player.Player2);
+                        gameCenterPageGame.ChangePlayerTurnText(Enums.Player.Player2);
                         UpdatePositionsOfAllStones();
                     }
 
@@ -92,18 +92,18 @@ namespace Mancala.Game
             {
                 if (Animation.HumanAnimationIsOn)
                 {
-                    gameCentrePageGame.DisableControls();
+                    gameCenterPageGame.DisableControls();
                     UnhighlightPlayer1Cups(true);
                 }
                 else if (player2Type == Enums.PlayerType.Human)
                 {
                     //No animation, but next player is human.
-                    gameCentrePageGame.DisableControls();
+                    gameCenterPageGame.DisableControls();
                     UnhighlightPlayer1Cups(false);
                 }
                 else if (Animation.ComputerAnimationIsOn)
                 {
-                    gameCentrePageGame.DisableControls();
+                    gameCenterPageGame.DisableControls();
                     UnhighlightPlayer1Cups(false);
                 }
 
@@ -115,7 +115,7 @@ namespace Mancala.Game
             {
                 if (player2Type == Enums.PlayerType.Human)
                 {
-                    gameCentrePageGame.DisableControls();
+                    gameCenterPageGame.DisableControls();
                     UnhighlightPlayer2Cups(Animation.HumanAnimationIsOn);
                     MoveNextStone();
                 }

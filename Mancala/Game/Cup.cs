@@ -21,17 +21,17 @@ namespace Mancala.Game
         public bool IsMancala { get; }
 
         /// <summary>
-        /// The label that represents the visible cup.
+        ///     The label that represents the visible cup.
         /// </summary>
         public Label CupControl { get; }
 
         /// <summary>
-        /// The label that represents the number of stones when that number is too large to display individual controls.
+        ///     The label that represents the number of stones when that number is too large to display individual controls.
         /// </summary>
         public Label StoneTextLabel { get; }
 
         /// <summary>
-        /// The labels that represent the visible stones.
+        ///     The labels that represent the visible stones.
         /// </summary>
         public Label[] StoneControls { get; }
 
@@ -90,7 +90,7 @@ namespace Mancala.Game
 
                     _isHighlighted = true;
                     SolidColorBrush color = ColorScheme.CurrentColorScheme.EnabledStoneColor;
-                    SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.EnabledStoneBorderColor;
+                    SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.EnabledStoneBorder.Color;
                     StoneTextLabel.Foreground = color;
                     foreach (Label stone in StoneControls)
                     {
@@ -102,7 +102,7 @@ namespace Mancala.Game
                 {
                     _isHighlighted = false;
                     SolidColorBrush color = ColorScheme.CurrentColorScheme.DisabledStoneColor;
-                    SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.DisabledStoneBorderColor;
+                    SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.DisabledStoneBorder.Color;
                     StoneTextLabel.Foreground = color;
                     foreach (Label stone in StoneControls)
                     {
@@ -133,12 +133,12 @@ namespace Mancala.Game
             StoneTextLabel.IsEnabled = false;
 
             CupControl.Background = ColorScheme.CurrentColorScheme.CupBackgroundColor;
-            CupControl.BorderBrush = ColorScheme.CurrentColorScheme.CupBorderColor;
-            CupControl.BorderThickness = ColorScheme.CurrentColorScheme.CupBorderThickness;
+            CupControl.BorderBrush = ColorScheme.CurrentColorScheme.CupBorder.Color;
+            CupControl.BorderThickness = ColorScheme.CurrentColorScheme.CupBorder.Thickness;
 
             SolidColorBrush color = ColorScheme.CurrentColorScheme.DisabledStoneColor;
-            SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.DisabledStoneBorderColor;
-            Thickness borderThickness = ColorScheme.CurrentColorScheme.StoneBorderThickness;
+            SolidColorBrush borderColor = ColorScheme.CurrentColorScheme.DisabledStoneBorder.Color;
+            Thickness borderThickness = ColorScheme.CurrentColorScheme.EnabledStoneBorder.Thickness;
             StoneTextLabel.Foreground = color;
             foreach (Label stone in StoneControls)
             {

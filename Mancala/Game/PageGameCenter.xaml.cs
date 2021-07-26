@@ -6,17 +6,17 @@ using System.Windows.Input;
 namespace Mancala.Game
 {
     /// <summary>
-    ///     Interaction logic for PageGameCentre.xaml
+    ///     Interaction logic for PageGameCenter.xaml
     /// </summary>
-    public partial class PageGameCentre
+    public partial class PageGameCenter
     {
         readonly WindowMain parentWindow;
         string player1TurnText;
         string player2TurnText;
 
-        private PageGameCentre() => InitializeComponent();
+        private PageGameCenter() => InitializeComponent();
 
-        public PageGameCentre(WindowMain mainWindow, Enums.PlayerType player2Type) : this()
+        public PageGameCenter(WindowMain mainWindow, Enums.PlayerType player2Type) : this()
         {
             parentWindow = mainWindow;
             SetText();
@@ -57,7 +57,7 @@ namespace Mancala.Game
         }
 
 
-        //In PageGameCentre because PageGameCentre is the lowest page to be created.
+        //In PageGameCenter because PageGameCenter is the lowest page to be created.
         void SetAnimation()
         {
             Animation.HumanTimeSpan = UserSettings.Default.HumanAnimationSpeed;

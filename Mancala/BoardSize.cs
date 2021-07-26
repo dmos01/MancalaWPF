@@ -9,7 +9,7 @@ namespace Mancala
         public const double DefaultAbsoluteHeight = 450;
         public readonly double AbsoluteHeight;
         public readonly double AbsoluteWidth;
-        public readonly Thickness CentreFrameMargin;
+        public readonly Thickness CenterFrameMargin;
         public readonly double CupSizeAndMancalaWidth;
         public readonly double PlayerSideWidth;
         public readonly Thickness RightMargin;
@@ -39,7 +39,7 @@ namespace Mancala
             //Uniform Grid seems to set the distance from edge to first/last item to half the gap between the other items. Therefore, / 2.
             double distanceFromEdgeOfGridToCup = sumOfGapsBetweenPlayerCups / numCupsPerRow / 2;
 
-            CentreFrameMargin = new Thickness(distanceFromEdgeOfGridToCup, normalDistanceToOuterEdge,
+            CenterFrameMargin = new Thickness(distanceFromEdgeOfGridToCup, normalDistanceToOuterEdge,
                 distanceFromEdgeOfGridToCup, normalDistanceToOuterEdge);
             RightMargin = new Thickness(0, 0, gapBetweenStones, 0);
 

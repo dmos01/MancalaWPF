@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Licenses.txt" />
     <Resource Include="Menu\Board Only (No Highlighting).png" />
     <Resource Include="Release History.txt" />
@@ -40,8 +44,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>InternalCupInfoResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Game\PageGameCentre.xaml.cs">
-      <DependentUpon>PageGameCentre.xaml</DependentUpon>
+    <Compile Update="Game\PageGameCenter.xaml.cs">
+      <DependentUpon>PageGameCenter.xaml</DependentUpon>
     </Compile>
     <Compile Update="Game\PageGameBoard.xaml.cs">
       <DependentUpon>PageGameBoard.xaml</DependentUpon>
@@ -103,7 +107,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Game\PageGameCentre.xaml">
+    <Page Update="Game\PageGameCenter.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Game\PageGameBoard.xaml">

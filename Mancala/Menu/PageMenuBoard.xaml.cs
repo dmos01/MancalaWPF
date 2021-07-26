@@ -54,8 +54,8 @@ namespace Mancala.Menu
 
             SolidColorBrush background = ColorScheme.CurrentColorScheme.CupBackgroundColor;
             SolidColorBrush text = ColorScheme.CurrentColorScheme.EnabledStoneColor;
-            SolidColorBrush border = ColorScheme.CurrentColorScheme.CupBorderColor;
-            Thickness borderThickness = ColorScheme.CurrentColorScheme.CupBorderThickness;
+            SolidColorBrush border = ColorScheme.CurrentColorScheme.CupBorder.Color;
+            Thickness borderThickness = ColorScheme.CurrentColorScheme.CupBorder.Thickness;
 
             btnNewGameSettings.Background = background;
             textBlockNewGameSettings.Foreground = text;
@@ -292,7 +292,7 @@ namespace Mancala.Menu
             Array.ForEach(cups, x => x.Height = boardSize.CupSizeAndMancalaWidth);
 
             dockPanelExclMancalas.Width = boardSize.PlayerSideWidth;
-            frameMenu.Margin = boardSize.CentreFrameMargin;
+            frameMenu.Margin = boardSize.CenterFrameMargin;
             btnPlayer1Mancala.Margin = boardSize.RightMargin;
             dockPanelExclMancalas.Margin = boardSize.RightMargin;
         }

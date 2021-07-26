@@ -1,48 +1,43 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
+
+// ReSharper disable ArrangeObjectCreationWhenTypeNotEvident
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Mancala
 {
     public class ColorScheme
     {
-        public SolidColorBrush EnabledStoneColor { get; }
-        public SolidColorBrush EnabledStoneBorderColor { get; }
-        public SolidColorBrush DisabledStoneColor { get; }
-        public SolidColorBrush DisabledStoneBorderColor { get; }
-        public Thickness StoneBorderThickness { get; }
-        public SolidColorBrush CupBackgroundColor { get; }
-        public SolidColorBrush CupBorderColor { get; }
-        public Thickness CupBorderThickness { get; }
+        public static readonly ColorScheme CurrentColorScheme = new(Colors.Lime, Colors.Black, Colors.SaddleBrown);
 
-        public ColorScheme(Color enabledStoneColor, Color disabledStoneColor, Color cupBackgroundColor)
+        public SolidColorBrush EnabledStoneColor { get; set; }
+        public Border EnabledStoneBorder { get; set; }
+        public SolidColorBrush DisabledStoneColor { get; set; }
+        public Border DisabledStoneBorder { get; set; }
+        public SolidColorBrush CupBackgroundColor { get; set; }
+        public Border CupBorder { get; set; }
+
+        public ColorScheme(Color enabledStoneColor, Color disabledStoneColor, Color cupColor)
         {
-            EnabledStoneColor = new SolidColorBrush(enabledStoneColor);
-            DisabledStoneColor = new SolidColorBrush(disabledStoneColor);
-            CupBackgroundColor = new SolidColorBrush(cupBackgroundColor);
+            EnabledStoneColor = new(enabledStoneColor);
+            DisabledStoneColor = new(disabledStoneColor);
+            CupBackgroundColor = new(cupColor);
 
-            EnabledStoneBorderColor = new SolidColorBrush(enabledStoneColor);
-            DisabledStoneBorderColor = new SolidColorBrush(disabledStoneColor);
-            CupBorderColor = new SolidColorBrush(Colors.Black);
-            StoneBorderThickness = new Thickness(0);
-            CupBorderThickness = new Thickness(0);
+            EnabledStoneBorder = new(enabledStoneColor, 0);
+            DisabledStoneBorder = new(disabledStoneColor, 0);
+            CupBorder = new(cupColor, 0);
         }
+    }
 
-        public ColorScheme(Color enabledStoneColor, Color enabledStoneBorderColor, Color disabledStoneColor, Color disabledStoneBorderColor, byte stoneBorderThickness, Color cupBackgroundColor, Color cupBorderColor, byte cupBorderThickness)
+    public class Border
+    {
+        public SolidColorBrush Color { get; }
+        public Thickness Thickness { get; }
+
+        public Border(Color color, byte thickness)
         {
-            EnabledStoneColor = new SolidColorBrush(enabledStoneColor);
-            EnabledStoneBorderColor = new SolidColorBrush(enabledStoneBorderColor);
-
-            DisabledStoneColor = new SolidColorBrush(disabledStoneColor);
-            DisabledStoneBorderColor = new SolidColorBrush(disabledStoneBorderColor);
-
-            CupBackgroundColor = new SolidColorBrush(cupBackgroundColor);
-            CupBorderColor = new SolidColorBrush(cupBorderColor);
-
-            StoneBorderThickness = new Thickness(stoneBorderThickness);
-            CupBorderThickness = new Thickness(cupBorderThickness);
+            Color = new(color);
+            Thickness = new Thickness(thickness);
         }
-
-        public static ColorScheme CurrentColorScheme = new(Colors.Lime, Colors.Black, Colors.SaddleBrown);
     }
 }

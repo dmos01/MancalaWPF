@@ -8,7 +8,7 @@ namespace Mancala.Game
     /// </summary>
     public partial class PageGameBoard
     {
-        readonly PageGameCentre gameCentrePageGame;
+        readonly PageGameCenter gameCenterPageGame;
         readonly WindowMain parentWindow;
 
         readonly Enums.PlayerType player2Type;
@@ -43,13 +43,13 @@ namespace Mancala.Game
             }
 
             parentWindow = mainWindow;
-            gameCentrePageGame = new PageGameCentre(mainWindow, player2Type);
+            gameCenterPageGame = new PageGameCenter(mainWindow, player2Type);
             if (boardSize != null)
                 ChangeSize(boardSize);
             currentPlayer = whoStarts;
             StartNewTurnAndUnhighlightPreviousChosenCupIfApplicable(false);
         }
 
-        void PageBoard_OnLoaded(object sender, RoutedEventArgs e) => frameCentre.Navigate(gameCentrePageGame);
+        void PageBoard_OnLoaded(object sender, RoutedEventArgs e) => frameCenter.Navigate(gameCenterPageGame);
     }
 }
