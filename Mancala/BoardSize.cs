@@ -21,7 +21,7 @@ namespace Mancala
         const double defaultStoneSize = 15;
         const double AbsoluteWidthPadding = 3;
         const double AbsoluteHeightPadding = 8; //Just seems to work.
-        const double slightlyMoreThanHalf = (double)12 / (double)7;
+        const double slightlyMoreThanHalf = (double) 12 / (double) 7;
 
 
         //Note: AbsoluteWidth not enough when stoneSize = 19 (or stoneSize == MaxStoneSize?).

@@ -44,7 +44,7 @@ namespace Mancala.Game
 
             parentWindow = mainWindow;
             gameCenterPageGame = new PageGameCenter(mainWindow, player2Type);
-            if (boardSize != null)
+            if (boardSize is not null)
                 ChangeSize(boardSize);
             currentPlayer = whoStarts;
             StartNewTurnAndUnhighlightPreviousChosenCupIfApplicable(false);

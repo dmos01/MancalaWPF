@@ -2,7 +2,6 @@
 using System.Windows.Media;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeNotEvident
-// ReSharper disable MemberCanBePrivate.Global
 
 namespace Mancala
 {

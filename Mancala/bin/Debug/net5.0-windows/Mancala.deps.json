@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "Mancala/4.2.0.4": {
+      "Mancala/4.2.1.5": {
         "runtime": {
           "Mancala.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "Mancala/4.2.0.4": {
+    "Mancala/4.2.1.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

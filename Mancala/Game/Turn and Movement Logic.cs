@@ -37,7 +37,7 @@ namespace Mancala.Game
                     : Enums.Player.Player1;
 
                 //There was a chosen cup from previous turn. Does not cover the computer getting another turn — handled below.
-                if (chosenCup != null)
+                if (chosenCup is not null)
                     chosenCup.IsHighlighted = false;
             }
 
@@ -66,7 +66,7 @@ namespace Mancala.Game
                         UnhighlightPlayer1Cups(false);
 
                         //The computer does not start its turn by having all cups enabled, so disable the chosen cup.
-                        if (withNewPlayer == false && chosenCup != null)
+                        if (withNewPlayer == false && chosenCup is not null)
                             chosenCup.IsHighlighted = false;
 
                         gameCenterPageGame.ChangePlayerTurnText(Enums.Player.Player2);

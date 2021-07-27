@@ -10,22 +10,12 @@ namespace Mancala.Menu
     /// </summary>
     public partial class PageRulesAndAbout
     {
-        /// <summary>
-        ///     Uses Assembly version. Not to be confused with Package Version or Assembly File Version.
-        /// </summary>
-        public static string ThreePartVersionNumber
-        {
-            get
-            {
-                Version v = Assembly.GetExecutingAssembly().GetName().Version;
-                return v.Major + "." + v.Minor + "." + v.Build;
-            }
-        }
-
+        readonly Version version = Assembly.GetExecutingAssembly().GetName().Version;
+        
         public PageRulesAndAbout()
         {
             InitializeComponent();
-            lblVersionNumber.Content = MancalaResources.VersionLiteral + " " + ThreePartVersionNumber +
+            lblVersionNumber.Content = MancalaResources.VersionLiteral + " " + version.Major + "." + version.Minor + "." + version.Build +
                                        MancalaResources.EndOfSentence;
             txtReadOnlyRules.Text = MancalaResources.Rules;
             txtReadOnlyRules.Focus();
@@ -36,7 +26,7 @@ namespace Mancala.Menu
         void lblVersionNumber_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show(string.Join(Environment.NewLine,
-                MancalaResources.MancalaLiteral + " " + ThreePartVersionNumber + MancalaResources.ReleaseDate,
+                MancalaResources.MancalaLiteral + " " + version.Major + "." + version.Minor + "." + version.Build + MancalaResources.ReleaseDate,
                 MancalaResources.CreatedBy, MessageResources.Licenses), MessageResources.AboutWindowTitle);
         }
     }

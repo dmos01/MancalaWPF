@@ -1,5 +1,11 @@
 ﻿Release History:
 
+Version 4.2.1 - 27 July 2021:
+*BorderColors and Thicknesses in ColorScheme moved to their own Border class.
+*"Centre" renamed to "center".
+*"!= null" changed to "is not null".
+
+
 Version 4.2 - 26 July 2021:
 *Added ColorScheme class which stores stone and cup colors and borders. This will make it easier to change colors or add other schemes in future.
 *Private constants in BoardSize moved to class scope.

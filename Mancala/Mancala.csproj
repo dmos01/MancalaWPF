@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject>Mancala.App</StartupObject>
     <ApplicationIcon>Green Stone.ico</ApplicationIcon>
-    <Version>4.2.0.4</Version>
+    <Version>4.2.1.5</Version>
     <Authors>Daniel Spencer</Authors>
     <Product>Mancala WPF</Product>
     <Copyright></Copyright>
