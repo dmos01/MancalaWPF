@@ -11,6 +11,7 @@ Version 4.2 - 26 July 2021:
 *Private constants in BoardSize moved to class scope.
 *Strings moved to resource files.
 *Targets .NET 5.0 and C# 9.0 to take advantage of new() when created type is evident from usage.
+*Uses StringBuilder.
 
 
 Version 4.1 - 30 January 2020:
