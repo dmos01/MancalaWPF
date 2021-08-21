@@ -21,6 +21,7 @@ namespace Mancala
         const double defaultStoneSize = 15;
         const double AbsoluteWidthPadding = 3;
         const double AbsoluteHeightPadding = 8; //Just seems to work.
+        // ReSharper disable once RedundantCast
         const double slightlyMoreThanHalf = (double) 12 / (double) 7;
 
 

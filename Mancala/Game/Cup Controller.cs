@@ -166,7 +166,7 @@ namespace Mancala.Game
 
         void FindClickedCup(object sender)
         {
-            if (!(sender is Label clicked))
+            if (sender is not Label clicked)
             {
                 MessageBox.Show(MessageResources.ClickedCupInvalidMessage, MessageResources.ErrorTitle);
                 return;

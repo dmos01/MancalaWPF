@@ -1,5 +1,9 @@
 ﻿Release History:
 
+Version 4.2.2 (Unreleased):
+*FindClickedCup() uses 'sender is not Label'.
+
+
 Version 4.2.1 - 27 July 2021:
 *BorderColors and Thicknesses in ColorScheme moved to their own Border class.
 *"Centre" renamed to "center".
