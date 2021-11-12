@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>Mancala.App</StartupObject>
     <ApplicationIcon>Green Stone.ico</ApplicationIcon>
-    <Version>4.2.1.5</Version>
+    <Version>4.3.0.6</Version>
     <Authors>Daniel Spencer</Authors>
     <Product>Mancala WPF</Product>
     <Copyright></Copyright>
